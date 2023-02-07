@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.DetectionProgressMapper"> 
+	
+	<select id="findByUserIdAndFileUploadId" parameterType="HashMap" resultType="cn.entity.DetectionProgress">
+		select *
+		from detection_progress 
+		where userId = #{userId} and fileUploadId = #{fileUploadId}
+		order by updateTime desc
+		limit 0,1
+	</select>
+	
+	<update id="updateStatusByUserIdAndFileUploadId" parameterType="HashMap" >
+		update detection_progress
+		set status = #{status}
+		where userId = #{userId} and fileUploadId = #{fileUploadId}
+	</update>
+	
+	<update id="updateDetectedCountById" parameterType="HashMap">
+		update detection_progress
+		set detectedCount = ${detectedCount}
+		where id = #{id}
+	</update>
+	
+	<insert id="saveDetectionProgress" parameterType="cn.entity.DetectionProgress" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into detection_progress
+				(id, userId, fileUploadId, type, totalCount, detectedCount, status, createTime, updateTime)
+		values 
+		        (null,#{userId},#{fileUploadId},#{type},#{totalCount},#{detectedCount},#{status},#{createTime},#{updateTime})
+	</insert>
+</mapper>

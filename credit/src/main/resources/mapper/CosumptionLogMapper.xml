@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.CosumptionLogMapper"> 
+	
+	<insert id="saveNumberCheckConsumption" parameterType="main.java.cn.domain.NumberCheckLogDomain">
+		insert into number_check_log
+		      (id,consumptionNum,userId,type,fileName,commit_count,count,realCount,emptyCount,silentCount,riskCount,
+		      menu,status,dayInt,createTime,updateTime,source,agent_id)
+		values
+		      (#{id},#{consumptionNum},#{userId},#{type},#{fileName},#{commitCount},#{count},#{realCount},#{emptyCount}
+		      ,#{silentCount},#{riskCount},#{menu},#{status},#{dayInt},#{createTime},
+		      #{updateTime},#{source},#{agentId})
+	</insert>
+</mapper>

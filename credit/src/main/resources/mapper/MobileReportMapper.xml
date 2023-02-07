@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.MobileReportMapper"> 
+	<select id="findMobileReportGroupAll" resultType="cn.entity.mobileReport.MobileReportGroup">
+		select * from mobile_report_group where isDeleted = 0
+	</select>
+	
+	<select id="findMobileReportDelivrdAll" resultType="cn.entity.mobileReport.MobileReportDelivrd">
+		select * from mobile_report_delivrd where  isDeleted = 0
+	</select>
+</mapper>

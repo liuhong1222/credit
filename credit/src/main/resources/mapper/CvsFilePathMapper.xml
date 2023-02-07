@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.CvsFilePathMapper"> 
+	
+	<select id="findByUserId" parameterType="string" resultType="cn.entity.CvsFilePath">
+		select *
+		from cvs_file_path 
+		where userId = #{_parameter} and isDeleted = 0
+		order by createTime desc
+	</select>
+	
+	<update id="deleteByIds" parameterType="string" >
+		update cvs_file_path
+		set isDeleted = 1
+		where id in (${_parameter}) and isDeleted = 0
+	</update>
+	
+	<update id="deleteCvsByTime" parameterType="HashMap" >
+		delete cvs_file_path
+		set isDeleted = 1
+		where userId = #{userId} 
+		and createDate >= #{startDate}
+		<![CDATA[and createDate <= #{startDate}]]>
+		and isDeleted = 0
+	</update>
+	
+	<select id="getTxtZipByIds" parameterType="string" resultType="cn.entity.CvsFilePath">
+		select *
+		from cvs_file_path 
+		where id in (${_parameter}) and isDeleted = 0
+		order by createTime desc
+	</select>
+	
+	<select id="getCvsFilePathByTime" parameterType="HashMap" resultType="cn.entity.CvsFilePath">
+		select *
+		from cvs_file_path 
+		where userId = #{userId} 
+		and createDate >= #{startDate}
+		<![CDATA[and createDate < #{endDate}]]>
+		and isDeleted = 0
+		order by createTime desc
+	</select>
+	
+	<select id="findById" parameterType="string" resultType="cn.entity.CvsFilePath">
+		select *
+		from cvs_file_path 
+		where id = ${_parameter} and isDeleted = 0
+	</select>
+	
+	<select id="findByIdAndFileCode" parameterType="HashMap" resultType="cn.entity.CvsFilePath">
+		select *
+		from cvs_file_path 
+		where userId = #{userId} 
+		and fileCode = #{fileCode}
+		and isDeleted = 0
+	</select>
+	
+	<insert id="saveCvsFilePath" parameterType="cn.entity.CvsFilePath">
+		insert into cvs_file_path
+				(userId, createDate, fileCode, thereFilePath, thereFileSize, thereCount, sixFilePath, 
+				  sixFileSize, sixCount, shutFilePath, shutFileSize, shutCount, unknownFilePath, unknownFileSize, 
+			      unknownSize, zipName, zipPath, zipSize, totalCount, createTime, isDeleted)
+		values 
+		        (#{userId},#{createDate},#{fileCode},#{thereFilePath},#{thereFileSize},#{thereCount},#{sixFilePath},
+		        #{sixFileSize},#{sixCount},#{shutFilePath},#{shutFileSize},#{shutCount},#{unknownFilePath},#{unknownFileSize},
+		        #{unknownSize},#{zipName},#{zipPath},#{zipSize},#{totalCount},#{createTime},#{isDeleted})
+	</insert>
+</mapper>

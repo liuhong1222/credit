@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.ApiDetailMapper"> 
+	
+	<insert id="saveOne" parameterType="cn.entity.ApiDetail">
+		insert into api_detail
+				(user_id, invoke_time, commit_count, success_count, create_time, update_time)
+		values 
+		        (#{userId},#{invokeTime},#{commitCount},#{successCount},now(),now())
+	</insert>
+</mapper>

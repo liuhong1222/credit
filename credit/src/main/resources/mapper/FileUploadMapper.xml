@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.FileUploadMapper"> 
+	
+	<select id="findById" parameterType="string" resultType="cn.entity.FileUpload">
+		select *
+		from file_upload 
+		where id = #{id} and isDeleted = 0
+	</select>
+	
+	<insert id="saveFileUpload" parameterType="cn.entity.FileUpload">
+		insert into file_upload
+				(id, userId, fileName, fileRows, fileUploadUrl, createTime, isDeleted)
+		values 
+		        (#{id},#{userId},#{fileName},#{fileRows},#{fileUploadUrl},#{createTime},#{isDeleted})
+	</insert>
+</mapper>
